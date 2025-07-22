@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage Médica</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+        }
+        .container-fluid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: auto;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .left-side {
+            flex: 1;
+            background: url('umedica.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 370px;
+        }
+        .right-side {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+        }
+        .cards-section {
+            padding: 40px;
+        }
+        .texto-home{
+            font-size: 12px;
+            text-justify: auto;
+        }
+        .texto-home-titulo{
+            color: #708a65;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+                $("menu").load("menu.php");
+            });
+    </script>    
+
+</head>
+<body>
+    <!-- Es para ver el menú de navegación -->
+    <menu></menu>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">Torres Médicas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Especialidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Se realiza el Contenido Principal -->
+    <div class="container-fluid">
+        <div class="left-side"></div>
+        <div class="right-side">
+            <h3 class="texto-home-titulo">Descripción de la empresa</h3>
+            <section class="texto-home">
+                <p>
+                El Dr. Luis Fernando Yamanaka Buenrostro es un médico cirujano egresado de la Universidad Latinoamericana (ULA) en Cuernavaca, Morelos. Cuenta con una cédula profesional número 08741379. Además, ha realizado un diplomado de Colposcopia en el Hospital Adolfo López Mateos en la Ciudad de México y un diplomado de Ultrasonido General e Intervencionista-Materno Fetal en Cuernavaca, Morelos. Es miembro del Colegio de Médicos Cirujanos del Estado de Morelos y del Colegio Mexicano de Ginecólogos dedicados a la Colposcopia.
+                </p>
+                <p>    
+                En su consultorio, el Dr. Yamanaka ofrece servicios de colposcopía, ginecología y diagnóstico médico, especializándose en el Virus del Papiloma Humano (VPH). También ofrece un paquete de promoción que incluye consulta médica, papanicolaou, colposcopía, ultrasonido pélvico y revisión de mamas, con el objetivo de prevenir y tratar a tiempo el cáncer cervicouterino y el cáncer de mama. Además, realiza estudios de androscopia y citología uretral en hombres para prevenir el cáncer de pene y las lesiones asociadas al VPH.
+                </p>
+                <p>
+                El Dr. Yamanaka también participa en el programa de radio Mundo 96.5 FM, donde se abordan temas relacionados con el VPH y se responden preguntas frecuentes. En su consulta general, ofrece control y seguimiento de diversas condiciones de salud, como diabetes mellitus, hipertensión arterial, colesterol, triglicéridos, climaterio, menopausia, control prenatal y planificación familiar, entre otros. El Dr. Yamanaka busca brindar una mejor calidad de vida a sus pacientes, priorizando siempre su salud.
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Se  realiza la sección de tarjetas -->
+    <div class="container cards-section">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-header bg-success text-white">
+                        <i class="fas fa-user-injured"></i> Pacientes
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Descripción breve del servicio.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-primary">Ver más</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-header bg-success text-white">
+                        <i class="fas fa-user-injured"></i> Médicos
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Descripción breve del servicio.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-success">Ver más</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-header bg-success text-white">
+                        <i class="fas fa-user-injured"></i> Citas
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Descripción breve del servicio.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-danger">Ver más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

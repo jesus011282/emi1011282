@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Torres Médicas</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+     /* Se realiza el menú de navegación */
+     .menu {
+      background-color: #708A65;
+      overflow: hidden;
+      padding: 10px 0;
+    }
+
+    .menu a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .menu a:hover {
+      background-color: #B9A86F;
+    }
+
+    /* Tiene el contenedor del formulario */
+    .form-container {
+      max-width: 300px;
+      margin: 50px auto; /* Ajuste para dejar espacio al menú */
+      background-color: white;
+      padding: 35px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #708A65;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+
+    :root {
+      --verde: #708A65;
+      --dorado: #B9A86F;
+      --negro: #e83636;
+      
+      --fondo: #F9F9F9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    
+
+    header img {
+      height: 60px;
+      width: auto;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      border: 3px solid var(--dorado);
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    button.prev, button.next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--verde);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      z-index: 1;
+      transition:background-color 0.3s ease;
+    }
+
+    button.prev:hover, button.next:hover {
+      background-color: var(--dorado);
+    }
+
+    button.prev {
+      left: 10px;
+    }
+
+    button.next {
+      right: 10px;
+    }
+
+    footer {
+      background-color: var(--negro);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+    .descripcion {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-left: 5px solid var(--dorado);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--negro);
+}
+
+.descripcion h2 {
+  margin-bottom: 15px;
+  color: var(--verde);
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--verde);
+  padding-bottom: 5px;
+}
+
+.descripcion p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+header {
+  background-color: var(--verde);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  box-shadow: 0 2px 5px rgba(245, 245, 245, 0.1);
+}
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.10s ease;
+}
+
+
+header img {
+  height: 100px;
+  width: auto;
+}
+
+header h1 {
+  font-size: 5.0rem;
+}
+
+</style>
+</head>
+<body>
+  <!-- Tiene lo que es el menú superior -->
+  <div class="menu">
+    <a href="inicio.html">Inicio</a>
+    <a href="paciente.php">Pacientes</a>
+    <a href="medico.php">Médicos</a>
+    <a href="cita.php">Citas</a>
+   </div>
+  <header>
+    <img src="bueno.jpg" alt="Logo Torres Médicas">
+    <h1>Torres Médicas</h1>
+    <nav class="navbar"></nav>
+   
+   
+  </header>
+
+  <section class="carousel">
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <div class="carousel-container" id="carouselContainer">
+      <img class="slide" src="th (1).jpg" alt="Imagen 1">
+      <img class="slide" src="th (2).jpg" alt="Imagen 2">
+      <img class="slide" src="th.jpg" alt="Imagen 3">
+    </div>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+  </section>
+  <section class="descripcion">
+    <h2>Descripción de la empresa</h2>
+    <p>
+      El Dr. Luis Fernando Yamanaka Buenrostro es un médico cirujano egresado de la Universidad Latinoamericana (ULA) en Cuernavaca, Morelos. Cuenta con una cédula profesional número 08741379. Además, ha realizado un diplomado de Colposcopia en el Hospital Adolfo López Mateos en la Ciudad de México y un diplomado de Ultrasonido General e Intervencionista-Materno Fetal en Cuernavaca, Morelos. Es miembro del Colegio de Médicos Cirujanos del Estado de Morelos y del Colegio Mexicano de Ginecólogos dedicados a la Colposcopia.
+    </p>
+    <p>
+      En su consultorio, el Dr. Yamanaka ofrece servicios de colposcopía, ginecología y diagnóstico médico, especializándose en el Virus del Papiloma Humano (VPH). También ofrece un paquete de promoción que incluye consulta médica, papanicolaou, colposcopía, ultrasonido pélvico y revisión de mamas, con el objetivo de prevenir y tratar a tiempo el cáncer cervicouterino y el cáncer de mama. Además, realiza estudios de androscopia y citología uretral en hombres para prevenir el cáncer de pene y las lesiones asociadas al VPH.
+    </p>
+    <p>
+      El Dr. Yamanaka también participa en el programa de radio Mundo 96.5 FM, donde se abordan temas relacionados con el VPH y se responden preguntas frecuentes. En su consulta general, ofrece control y seguimiento de diversas condiciones de salud, como diabetes mellitus, hipertensión arterial, colesterol, triglicéridos, climaterio, menopausia, control prenatal y planificación familiar, entre otros. El Dr. Yamanaka busca brindar una mejor calidad de vida a sus pacientes, priorizando siempre su salud.
+    </p>
+  </section>
+  
+
+  <footer>
+    <p>© 2025 creanuevo@hotmail.com</p>
+  </footer>
+
+  <script>
+    const container = document.getElementById("carouselContainer");
+    const slides = document.querySelectorAll(".slide");
+    let slideIndex = 0;
+
+    function moveSlide(n) {
+      slideIndex += n;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      if (slideIndex >= slides.length) slideIndex = 0;
+
+      const slideWidth = slides[0].clientWidth;
+      container.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+    }
+
+    window.addEventListener("resize", () => {
+      // Se realiza el ajuste la posición al redimensionar
+      const slideWidth = slides[0].clientWidth;
+      container.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+    });
+  </script>
+</body>
+</html>

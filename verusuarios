@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Usuarios</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <div class="container mt-4">
+    <h2 class="mb-4">Usuarios del Sistema</h2>
+    <table id="usuarioTable" class="display table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th><th>Usuario</th><th>Contraseña</th><th>ID Logic</th><th>Tipo</th><th>Perfil</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        include 'connect_dev.php';
+        try {
+          $stmt = $conn->prepare("SELECT * FROM usuarios");
+          $stmt->execute();
+          foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            echo "<tr>
+              <td>{$row['id']}</td>
+              <td>{$row['usuario']}</td>
+              <td>{$row['pass']}</td>
+              <td>{$row['id_logic']}</td>
+              <td>{$row['Tipo']}</td>
+              <td>{$row['Perfil']}</td>
+              <td>
+                <button class='btn btn-warning btn-sm mr-1' onclick='abrirModal(" . json_encode($row) . ")'><i class='fas fa-edit'></i></button>
+                <button class='btn btn-danger btn-sm' onclick='eliminarUsuario({$row["id"]})'><i class='fas fa-trash-alt'></i></button>
+              </td>
+            </tr>";
+          }
+        } catch (PDOException $e) {
+          echo "<tr><td colspan='7'>Error: {$e->getMessage()}</td></tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modalActualizar">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="formActualizar">
+          <div class="modal-header">
+            <h5 class="modal-title">Actualizar Usuario</h5>
+            <button type="button" class="close" onclick="$('#modalActualizar').modal('hide')">&times;</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="id">
+            <div class="form-group"><label>Usuario:</label><input type="text" id="usuario" class="form-control"></div>
+            <div class="form-group"><label>Contraseña:</label><input type="text" id="pass" class="form-control"></div>
+            <div class="form-group"><label>ID Logic:</label><input type="number" id="id_logic" class="form-control"></div>
+            <div class="form-group"><label>Tipo:</label><input type="number" id="Tipo" class="form-control"></div>
+            <div class="form-group"><label>Perfil:</label><input type="text" id="Perfil" class="form-control"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="btnGuardar" class="btn btn-success">
+              <span id="spinnerGuardar" class="spinner-border spinner-border-sm d-none"></span>
+              <span id="textGuardar">Guardar</span>
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="$('#modalActualizar').modal('hide')">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script>
+$(document).ready(() => {
+  $('#usuarioTable').DataTable();
+});
+
+function abrirModal(data) {
+  $('#id').val(data.id);
+  $('#usuario').val(data.usuario);
+  $('#pass').val(data.pass);
+  $('#id_logic').val(data.id_logic);
+  $('#Tipo').val(data.Tipo);
+  $('#Perfil').val(data.Perfil);
+  $('#modalActualizar').modal('show');
+}
+
+$('#formActualizar').on('submit', function(e) {
+  e.preventDefault();
+  $('#spinnerGuardar').removeClass('d-none');
+  $('#textGuardar').text('Guardando...');
+
+  const datos = {
+    id: $('#id').val(),
+    usuario: $('#usuario').val(),
+    pass: $('#pass').val(),
+    id_logic: $('#id_logic').val(),
+    Tipo: $('#Tipo').val(),
+    Perfil: $('#Perfil').val()
+  };
+
+  $.ajax({
+    url: 'actualizar_usuario.php',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(datos),
+    success: () => {
+      $('#modalActualizar').modal('hide');
+      $('#spinnerGuardar').addClass('d-none');
+      $('#textGuardar').text('Guardar');
+      Swal.fire({ icon: 'success', title: 'Usuario actualizado', showConfirmButton: false, timer: 1500 }).then(() => location.reload());
+    },
+    error: () => {
+      $('#spinnerGuardar').addClass('d-none');
+      $('#textGuardar').text('Guardar');
+      Swal.fire({ icon: 'error', title: 'Error', text: 'No se pudo actualizar el usuario.' });
+    }
+  });
+});
+
+function eliminarUsuario(id) {
+  Swal.fire({
+    title: '¿Eliminar este usuario?',
+    text: 'Esta acción no se puede deshacer',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+    showLoaderOnConfirm: true,
+    preConfirm: () => {
+      return $.ajax({
+        url: 'actualizar_usuario.php',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ eliminar_id: id })
+      }).then(() => {
+        Swal.fire({ icon: 'success', title: 'Usuario eliminado', showConfirmButton: false, timer: 1500 }).then(() => location.reload());
+      }).catch(() => {
+        Swal.showValidationMessage('No se pudo eliminar el usuario.');
+      });
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+  });
+}
+</script>
+</body>
+</html>

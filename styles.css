@@ -1,0 +1,40 @@
+﻿:root {
+    --verde: #708A65; /* En la cual se utiliza verde oliva suave, usado en menu o el encabezado*/
+    --dorado: #B9A86F; /* Es el color dorado apagado, que es el ideal para poder resaltar los elementos que se activa*/
+    --negro: #e83636; /* El color rojo intenso,que tiene la probabilidad  en el uso de los botones en eliminar o alertas*/
+    --fondo: #F9F9F9; /* Es el fondo claro, que se usa en las areas de los contenidos */
+}
+
+body {
+    font-family: Arial, sans-serif; /* Lo que es la fuente principal del sitio*/
+    background-color: var(--fondo); /* Lo que es el color de fondo definido como son variable*/
+    margin: 0; /* Se realiza la eliminacion de los margenes por los defectos del navegador*/
+    padding: 0; /* Que se elimina podding por defecto*/
+}
+
+.menu {
+    background-color: var(--verde); /* Lo aplica del color del fondo en la variable */
+    padding: 10px 0; /* En realizar los espaciado de la superior de la inferior */
+}
+
+    .menu a {
+        color: white; /* Se realiza lo que es el texto blanco para el enlace*/
+        padding: 14px 20px; /* En el espacio interno para poder realizar el enlace que se vea mejor */
+        text-decoration: none; /* Que se elimine en el subrayado  de los enlace*/
+        font-weight: bold; /* texto en la negrita */
+        display: inline-block; /* Que se permite en la aplicacion paggin y los margenes */
+    }
+/*.menu a: hover que se realiza lo que es el cambio de fondo en el enlace en el usuario del cursor*/
+/*.menu a.active: que se mantiene lo que es el fondo dorado en el enlace de la pagina actual (util para las navegacion activa)*/
+        .menu a:hover, .menu a.active {
+            background-color: var(--dorado);
+        }
+/* .session-info: que se utiliza para dar informacion de la 
+sesion del usuario como (nombre o estado de la seccion) */
+/* en la cual realiza lo que es la alineacion de todos dispositvos */
+
+.session-info {
+    color: white;
+    font-weight: bold;
+    margin-left: 20px;
+}
